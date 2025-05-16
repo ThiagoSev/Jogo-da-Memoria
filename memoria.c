@@ -9,12 +9,23 @@ void gerarMatriz(){
     
     srand(time(NULL));
     
+    for(int i=0;i<16;i++){
+        rand9[i]=rand()%10;
+        for(int j=0;j<i;j++){
+            while(rand9[i]==rand9[j]){
+                rand9[i]=rand()%10;
+            };
+        }
+    }
     //cria a matriz
+
+    int contador=0;
     for(int i=0;i<4;i++){
         for(int j=0; j<4;j+=2){
             int isRandEqual=1;
+            
             //atribuir um valor aleatório que já não tenha sido atribuído antes
-            do{
+            /*do{
                 isRandEqual=0;
                 rand9[i+j]=rand()%9;
                 for(int r=0;r<(i+j);r++){
@@ -23,10 +34,11 @@ void gerarMatriz(){
                         break;
                     }
                 }
-            }while(isRandEqual==1);
+            }while(isRandEqual==1);*/
             
-            matriz[i][j]=rand9[i+j];
+            matriz[i][j]=rand9[contador];
             matriz[i][j+1]=matriz[i][j];
+            contador++;
         }
     }
     
