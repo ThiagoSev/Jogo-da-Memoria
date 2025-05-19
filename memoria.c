@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <windows.h>
 
-void gerarMatriz(){
-    int matriz[4][4];
+void gerarMatriz(int matriz[4][4]){
     int rand9[16];
     
     //gera uma lista com números aleatórios de 0 a 9. Era pra gerar números diferentes, mas esta parte não funciona
@@ -43,13 +43,13 @@ void gerarMatriz(){
     }
     
     //mostra a matriz normal (temporário)
-    printf("----matriz normal-------\n");
+    /*printf("----matriz normal-------\n");
     for(int i=0;i<4;i++){
         for(int j=0; j<4;j++){
             printf("%i",matriz[i][j]);
         }
         printf("\n");
-    }
+    }*/
     
     //embaralhar a matriz
     
@@ -62,21 +62,34 @@ void gerarMatriz(){
             mAleatorio=temp;
         }
     }
-    
-    //mostra a matriz embaralhada
-    printf("\n------matriz embaralhada-------\n");
+}
+int mostrarMatriz(int matriz[4][4]){
     for(int i=0;i<4;i++){
         for(int j=0; j<4;j++){
             printf("%i",matriz[i][j]);
         }
         printf("\n");
-    }  
+    } 
+    Sleep(5000);
+    system("cls");
+    printf("passou-se 5 segundos\n\n");
+    for(int i=0;i<4;i++){
+        for(int j=0; j<4;j++){
+            printf("%c",5);
+        }
+        printf("\n");
+    } 
+    
+    return 0;
 }
 int main()
 {
+    system("cls");
+    int matriz[4][4];
     srand(time(NULL));
 
-    gerarMatriz();
+    gerarMatriz(matriz);
+    mostrarMatriz(matriz);
 
     return 0;
 }
