@@ -1,95 +1,71 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 #include <time.h>
-#include <windows.h>
 
-void gerarMatriz(int matriz[4][4]){
-    int rand9[16];
-    
-    //gera uma lista com números aleatórios de 0 a 9. Era pra gerar números diferentes, mas esta parte não funciona
-    for(int i=0;i<16;i++){
-        rand9[i]=rand()%10;
+void generateArrayOfDoubles(int doubles[16])
+{
+    int counts[10] = {0};
+    int i = 0;
 
-        for(int j=0;j<i;j++){
-
-            while(rand9[i]==rand9[j]){
-                rand9[i]=rand()%10;
-            };
+    while (i < 16)
+    {
+        int value = rand() % 10;
+        if (counts[value] < 2)
+        {
+            doubles[i] = value;
+            doubles[i + 1] = value;
+            counts[value] += 2;
+            i += 2;
         }
     }
-    //cria a matriz
 
-    int contador=0;
-    for(int i=0;i<4;i++){
-        for(int j=0; j<4;j+=2){
-            /*int isRandEqual=1;
-            
-            //atribuir um valor aleatório que já não tenha sido atribuído antes
-            do{
-                isRandEqual=0;
-                rand9[i+j]=rand()%9;
-                for(int r=0;r<(i+j);r++){
-                    if(rand9[i+j]==rand9[r]){
-                        isRandEqual=1;
-                        break;
-                    }
-                }
-            }while(isRandEqual==1);*/
-            
-            matriz[i][j]=rand9[contador];
-            matriz[i][j+1]=matriz[i][j];
-            contador++;
-        }
+    for (int j = 0; j < 16; j++)
+    {
+        int value = rand() % 16;
+        int doubleValue = doubles[j];
+        doubles[j] = doubles[value];
+        doubles[value] = doubleValue;
     }
-    
-    //mostra a matriz normal (temporário)
-    /*printf("----matriz normal-------\n");
-    for(int i=0;i<4;i++){
-        for(int j=0; j<4;j++){
-            printf("%i",matriz[i][j]);
-        }
-        printf("\n");
-    }*/
-    
-    //embaralhar a matriz
-    
-    for(int i=0;i<4;i++){
-        for(int j=0; j<4;j++){
-            int temp=0;
-            int mAleatorio=matriz[rand()%4][rand()%4];
-            temp=matriz[i][j];
-            matriz[i][j]=mAleatorio;
-            mAleatorio=temp;
+}
+
+void generateMatriz(int matriz[4][4], int doubles[16])
+{
+
+    int d = 0;
+
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            matriz[i][j] = doubles[d];
+            d++;
         }
     }
 }
-int mostrarMatriz(int matriz[4][4]){
-    for(int i=0;i<4;i++){
-        for(int j=0; j<4;j++){
-            printf("%i",matriz[i][j]);
+
+void showMatriz(int matriz[4][4])
+{
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            printf("%d\t", matriz[i][j]);
         }
         printf("\n");
-    } 
-    Sleep(5000);
-    system("cls");
-    printf("passou-se 5 segundos\n\n");
-    for(int i=0;i<4;i++){
-        for(int j=0; j<4;j++){
-            printf("%c",5);
-        }
-        printf("\n");
-    } 
-    
-    return 0;
+    }
 }
+
 int main()
 {
-    system("cls");
-    int matriz[4][4];
+    setlocale(LC_ALL, "UTF-8");
     srand(time(NULL));
 
-    gerarMatriz(matriz);
-    mostrarMatriz(matriz);
+    int doubles[16], matrizValues[4][4];
+
+    generateArrayOfDoubles(doubles);
+    generateMatriz(matrizValues, doubles);
+    mostrarMatriz(matrizValues);
 
     return 0;
 }
