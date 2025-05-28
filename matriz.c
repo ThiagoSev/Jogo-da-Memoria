@@ -75,9 +75,24 @@ void showMatriz(int matriz[4][4])
     }
 }
 
-void askForInput(){
-    printf("digite uma coordenada(x-y): ");
-    int column, row;
-    scanf("%i %i",&row,&column);
-    printf("\nlinha: %i. coluna: %i\n",row, column);
+void askForInput(int matrizValues[4][4],int matrizASCII[4][4]){
+    int column1, column2, row1, row2;
+    
+        printf("digite a primeira coordenada(x-y):\n");
+        scanf("%i %i",&row1,&column1);
+        printf("digite a segunda coordenada(x-y):\n");
+        scanf("%i %i",&row2,&column2);
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                if((i==row1 &&j==column1) || (i==row2 &&j==column2)){
+                    printf("%d\t",matrizValues[i][j]);
+                }else{
+                    printf("%c\t", matrizASCII[i][j]);
+                }  
+            }
+            printf("\n");
+        }
+    
 }

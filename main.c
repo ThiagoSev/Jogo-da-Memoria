@@ -46,10 +46,10 @@ int main()
         awaitFiveSeconds();
         cleanScreen();
         generateAndShowACIIMatriz(matrizASCII);
-        askForInput();
+        askForInput(matrizValues,matrizASCII);
 
         printf("Deseja continuar jogando? \n\n");
-        printf("Pressione qualquer tecla para jogar novamente\n");
+        printf("Pressione qualquer numero para jogar novamente\n");
         printf("Pressione 0 para encerrar o jogo\n");
         scanf("%d", &play);
     }
