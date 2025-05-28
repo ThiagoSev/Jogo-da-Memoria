@@ -36,7 +36,7 @@ int main()
 
     int doubles[16], matrizValues[4][4], play = 1;
 
-    // int matrizASCII[4][4]
+    int matrizASCII[4][4];
 
     while (play != 0)
     {
@@ -45,6 +45,8 @@ int main()
         showMatriz(matrizValues);
         awaitFiveSeconds();
         cleanScreen();
+        generateAndShowACIIMatriz(matrizASCII);
+        askForInput();
 
         printf("Deseja continuar jogando? \n\n");
         printf("Pressione qualquer tecla para jogar novamente\n");
@@ -52,7 +54,7 @@ int main()
         scanf("%d", &play);
     }
 
-    // generateAndShowACIIMatriz(matrizASCII);
+    
 
     return 0;
 }

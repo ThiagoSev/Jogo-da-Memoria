@@ -74,3 +74,10 @@ void showMatriz(int matriz[4][4])
         printf("\n");
     }
 }
+
+void askForInput(){
+    printf("digite uma coordenada(x-y): ");
+    int column, row;
+    scanf("%i %i",&row,&column);
+    printf("\nlinha: %i. coluna: %i\n",row, column);
+}
