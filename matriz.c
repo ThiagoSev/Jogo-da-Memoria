@@ -75,24 +75,39 @@ void showMatriz(int matriz[4][4])
     }
 }
 
-void askForInput(int matrizValues[4][4],int matrizASCII[4][4]){
-    int column1, column2, row1, row2;
-    
-        printf("digite a primeira coordenada(x-y):\n");
-        scanf("%i %i",&row1,&column1);
-        printf("digite a segunda coordenada(x-y):\n");
-        scanf("%i %i",&row2,&column2);
-        for (int i = 0; i < 4; i++)
+void askForInput(int choise[3], int matrizValues[4][4],int matrizASCII[4][4]){
+    printf("digite a primeira coordenada(x-y):\n");
+    scanf("%i %i",&choise[0],&choise[1]);
+    printf("digite a segunda coordenada(x-y):\n");
+    scanf("%i %i",&choise[2],&choise[3]);
+
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
         {
-            for (int j = 0; j < 4; j++)
-            {
-                if((i==row1 &&j==column1) || (i==row2 &&j==column2)){
-                    printf("%d\t",matrizValues[i][j]);
-                }else{
-                    printf("%c\t", matrizASCII[i][j]);
-                }  
-            }
-            printf("\n");
+            if((i==choise[0] &&j==choise[1]) || (i==choise[2] && j==choise[3])){
+                
+                printf("%d\t",matrizValues[i][j]);
+            }else{
+                printf("%c\t", matrizASCII[i][j]);
+            }  
         }
+        printf("\n");
     
+    }
+}
+
+int checkMatch(int playerScore, int playerErrors, int choise[3], int matrizValues[4][4], int matrizASCII[4][4]){
+    if(matrizValues[choise[0]][choise[1]] == matrizValues[choise[2]][choise[3]])
+    {
+        matrizASCII[choise[0]][choise[1]] = matrizValues[choise[0]][choise[1]];
+        matrizASCII[choise[2]][choise[3]] = matrizValues[choise[2]][choise[3]];
+
+        printf("\ncorreto! \7");
+        return 1;
+        
+    }else{
+        printf("\nerrou");
+        return 0;
+    }
 }

@@ -38,15 +38,25 @@ int main()
 
     int matrizASCII[4][4];
 
+    int choise[3], playerScore=0,playerErrors=0;
+
     while (play != 0)
     {
         generateArrayOfDoubles(doubles);
         generateMatriz(matrizValues, doubles);
         showMatriz(matrizValues);
-        awaitFiveSeconds();
-        cleanScreen();
-        generateAndShowACIIMatriz(matrizASCII);
-        askForInput(matrizValues,matrizASCII);
+        while(playerErrors<=10 || playerScore<=8){
+            awaitFiveSeconds();
+            cleanScreen();
+            generateAndShowACIIMatriz(matrizASCII);
+            askForInput(choise,matrizValues,matrizASCII);
+            if(checkMatch(playerScore,playerErrors,choise,matrizValues,matrizASCII)){
+                playerScore++;
+            }else{
+                playerErrors++;
+            }
+            printf("pontos: %i\n", playerScore);
+        }
 
         printf("Deseja continuar jogando? \n\n");
         printf("Pressione qualquer numero para jogar novamente\n");
