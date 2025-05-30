@@ -34,25 +34,29 @@ int main()
     setlocale(LC_ALL, "UTF-8");
     srand(time(NULL));
 
-    int doubles[16], matrizValues[4][4], play = 1;
+    int doubles[16], matrizValues[4][4], play = 1, matrizASCII[4][4];
+    ;
 
-    int matrizASCII[4][4];
-
-    int choise[3], playerScore=0,playerErrors=0;
+    int choise[3], playerScore = 0, playerErrors = 0;
 
     while (play != 0)
     {
         generateArrayOfDoubles(doubles);
         generateMatriz(matrizValues, doubles);
-        showMatriz(matrizValues);
-        while(playerErrors<=10 || playerScore<=8){
+        showMatriz(matrizValues, 'd');
+        while (playerErrors <= 10 || playerScore <= 8)
+        {
             awaitFiveSeconds();
             cleanScreen();
-            generateAndShowACIIMatriz(matrizASCII);
-            askForInput(choise,matrizValues,matrizASCII);
-            if(checkMatch(playerScore,playerErrors,choise,matrizValues,matrizASCII)){
+            fillASCIIMatriz(matrizASCII);
+            showMatriz(matrizASCII, 'c');
+            askForInput(choise, matrizValues, matrizASCII);
+            if (checkMatch(playerScore, playerErrors, choise, matrizValues, matrizASCII))
+            {
                 playerScore++;
-            }else{
+            }
+            else
+            {
                 playerErrors++;
             }
             printf("pontos: %i\n", playerScore);
@@ -63,8 +67,6 @@ int main()
         printf("Pressione 0 para encerrar o jogo\n");
         scanf("%d", &play);
     }
-
-    
 
     return 0;
 }

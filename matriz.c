@@ -43,8 +43,9 @@ void generateMatriz(int matriz[4][4], int doubles[16])
     }
 }
 
-void generateAndShowACIIMatriz(int matriz[4][4])
+void fillASCIIMatriz(int matriz[4][4])
 {
+
     for (int i = 0; i < 4; i++)
     {
         for (int j = 0; j < 4; j++)
@@ -52,61 +53,65 @@ void generateAndShowACIIMatriz(int matriz[4][4])
             matriz[i][j] = 5;
         }
     }
-
-    for (int i = 0; i < 4; i++)
-    {
-        for (int j = 0; j < 4; j++)
-        {
-            printf("%c\t", matriz[i][j]);
-        }
-        printf("\n");
-    }
 }
 
-void showMatriz(int matriz[4][4])
+void showMatriz(int matriz[4][4], char matrizType)
 {
     for (int i = 0; i < 4; i++)
     {
         for (int j = 0; j < 4; j++)
         {
-            printf("%d\t", matriz[i][j]);
+            if (matrizType == 'd')
+            {
+                printf("%d\t", matriz[i][j]);
+            }
+
+            if (matrizType == 'c')
+            {
+                printf("%c\t", matriz[i][j]);
+            }
         }
         printf("\n");
     }
 }
 
-void askForInput(int choise[3], int matrizValues[4][4],int matrizASCII[4][4]){
+void askForInput(int choise[3], int matrizValues[4][4], int matrizASCII[4][4])
+{
     printf("digite a primeira coordenada(x-y):\n");
-    scanf("%i %i",&choise[0],&choise[1]);
+    scanf("%i %i", &choise[0], &choise[1]);
     printf("digite a segunda coordenada(x-y):\n");
-    scanf("%i %i",&choise[2],&choise[3]);
+    scanf("%i %i", &choise[2], &choise[3]);
 
     for (int i = 0; i < 4; i++)
     {
         for (int j = 0; j < 4; j++)
         {
-            if((i==choise[0] &&j==choise[1]) || (i==choise[2] && j==choise[3])){
-                
-                printf("%d\t",matrizValues[i][j]);
-            }else{
+            if ((i == choise[0] && j == choise[1]) || (i == choise[2] && j == choise[3]))
+            {
+
+                printf("%d\t", matrizValues[i][j]);
+            }
+            else
+            {
                 printf("%c\t", matrizASCII[i][j]);
-            }  
+            }
         }
         printf("\n");
-    
     }
 }
 
-int checkMatch(int playerScore, int playerErrors, int choise[3], int matrizValues[4][4], int matrizASCII[4][4]){
-    if(matrizValues[choise[0]][choise[1]] == matrizValues[choise[2]][choise[3]])
+int checkMatch(int playerScore, int playerErrors, int choise[3], int matrizValues[4][4], int matrizASCII[4][4])
+{
+    if (matrizValues[choise[0]][choise[1]] == matrizValues[choise[2]][choise[3]])
     {
         matrizASCII[choise[0]][choise[1]] = matrizValues[choise[0]][choise[1]];
         matrizASCII[choise[2]][choise[3]] = matrizValues[choise[2]][choise[3]];
 
         printf("\ncorreto! \7");
         return 1;
-        
-    }else{
+    }
+    else
+    {
         printf("\nerrou");
         return 0;
     }
