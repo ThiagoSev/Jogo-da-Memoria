@@ -31,24 +31,24 @@ void cleanScreen()
 
 int main()
 {
-    setlocale(LC_ALL, "UTF-8");
+    setlocale(LC_ALL, "UTF-16");
     srand(time(NULL));
 
     int doubles[16], matrizValues[4][4], play = 1, matrizASCII[4][4];
     ;
 
-    int choise[3], playerScore = 0, playerErrors = 0;
+    int choise[4], playerScore = 0, playerErrors = 0;
 
     while (play != 0)
     {
         generateArrayOfDoubles(doubles);
         generateMatriz(matrizValues, doubles);
         showMatriz(matrizValues, 'd');
+        fillASCIIMatriz(matrizASCII);
         while (playerErrors <= 10 || playerScore <= 8)
         {
             awaitFiveSeconds();
             cleanScreen();
-            fillASCIIMatriz(matrizASCII);
             showMatriz(matrizASCII, 'c');
             askForInput(choise, matrizValues, matrizASCII);
             if (checkMatch(playerScore, playerErrors, choise, matrizValues, matrizASCII))

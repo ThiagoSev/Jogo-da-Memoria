@@ -75,7 +75,7 @@ void showMatriz(int matriz[4][4], char matrizType)
     }
 }
 
-void askForInput(int choise[3], int matrizValues[4][4], int matrizASCII[4][4])
+void askForInput(int choise[4], int matrizValues[4][4], int matrizASCII[4][4])
 {
     printf("digite a primeira coordenada(x-y):\n");
     scanf("%i %i", &choise[0], &choise[1]);
@@ -100,12 +100,58 @@ void askForInput(int choise[3], int matrizValues[4][4], int matrizASCII[4][4])
     }
 }
 
-int checkMatch(int playerScore, int playerErrors, int choise[3], int matrizValues[4][4], int matrizASCII[4][4])
+int indexMapper[16];
+int i = 0;
+
+int replaceIndex(int indexMapper[16], int choise[4])
+{
+
+    if (i >= 16)
+    {
+        return printf("Erro, index inválido");
+    }
+
+    int control = 0;
+    int c = 0;
+
+    while (control < 4)
+    {
+        if (c < 4)
+        {
+            indexMapper[i] = choise[c];
+            c++;
+            i++;
+        }
+
+        control++;
+    }
+
+    return 0;
+}
+
+int showIndexMapper(int indexMapper[16])
+{
+    int i = 0;
+    printf("I'm here");
+
+    while (i < 16)
+    {
+        printf("%d\t", indexMapper[i]);
+    }
+}
+
+int checkMatch(int playerScore, int playerErrors, int choise[4], int matrizValues[4][4], int matrizASCII[4][4])
 {
     if (matrizValues[choise[0]][choise[1]] == matrizValues[choise[2]][choise[3]])
     {
+        printf("trocou");
         matrizASCII[choise[0]][choise[1]] = matrizValues[choise[0]][choise[1]];
         matrizASCII[choise[2]][choise[3]] = matrizValues[choise[2]][choise[3]];
+
+        replaceIndex(indexMapper, choise);
+        showIndexMapper(indexMapper);
+
+        // Verificar o vazamento de memória
 
         printf("\ncorreto! \7");
         return 1;
