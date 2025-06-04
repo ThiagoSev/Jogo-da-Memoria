@@ -1,9 +1,10 @@
 #include "matriz.h"
-
+#include "game.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
 #include <time.h>
+#include <stdbool.h>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -43,15 +44,15 @@ int main()
     {
         generateArrayOfDoubles(doubles);
         generateMatriz(matrizValues, doubles);
-        showMatriz(matrizValues, 'd');
+        showMatriz(matrizValues);
         fillASCIIMatriz(matrizASCII);
+        awaitFiveSeconds();
         while (playerErrors <= 10 || playerScore <= 8)
         {
-            awaitFiveSeconds();
             cleanScreen();
-            showMatriz(matrizASCII, 'c');
+            showMatriz(matrizASCII);
             askForInput(choise, matrizValues, matrizASCII);
-            if (checkMatch(playerScore, playerErrors, choise, matrizValues, matrizASCII))
+            if (checkMatch(choise, matrizValues, matrizASCII))
             {
                 playerScore++;
             }
@@ -59,6 +60,7 @@ int main()
             {
                 playerErrors++;
             }
+
             printf("pontos: %i\n", playerScore);
         }
 
