@@ -23,7 +23,7 @@ void saveScore(int playerScore, int playerErrors)
     printf("Erro ao abrir ou criar o arquivo!\n");
     return;
   }
-  fprintf(arquivo, "Jogador: %s | Score: %d | Errors: %d\n", apelido, playerScore, playerErrors);
+  fprintf(arquivo, "Jogador: %s | Score: %i | Errors: %i\n", apelido, playerScore, playerErrors);
   fclose(arquivo);
   printf("Pontuação salva com sucesso!\n");
 }
