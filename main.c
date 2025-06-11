@@ -35,9 +35,8 @@ int main()
     setlocale(LC_ALL, "UTF-16");
     srand(time(NULL));
 
-    int doubles[16], matrizValues[4][4], play = 1, matrizASCII[4][4];
-    ;
-
+    int doubles[16], matrizValues[4][4], matrizASCII[4][4], play = 1;
+    
     int choise[4], playerScore = 0, playerErrors = 0;
 
     while (play != 0)
@@ -47,10 +46,11 @@ int main()
         showMatriz(matrizValues);
         fillASCIIMatriz(matrizASCII);
         awaitFiveSeconds();
-        while (playerErrors <= 10 || playerScore <= 8)
+        while (playerErrors < 10 || playerScore < 8)
         {
             cleanScreen();
             showMatriz(matrizASCII);
+            printf("pontos: %i\n", playerScore);
             askForInput(choise, matrizValues, matrizASCII);
             if (checkMatch(choise, matrizValues, matrizASCII))
             {
@@ -61,9 +61,9 @@ int main()
                 playerErrors++;
             }
 
-            printf("pontos: %i\n", playerScore);
+            
         }
-
+        saveScore(playerScore, playerErrors);
         printf("Deseja continuar jogando? \n\n");
         printf("Pressione qualquer numero para jogar novamente\n");
         printf("Pressione 0 para encerrar o jogo\n");
