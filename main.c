@@ -6,18 +6,22 @@
 #include <time.h>
 #include <stdbool.h>
 
+#define ASCII_COLOR_BOLD_RED "\e[1;31m"
+#define ASCCI_COLOR_BOLD_GREEN "\e[1;32m"
+#define ASCII_RESET_COLOR "\e[0m"
+
 #ifdef _WIN32
 #include <windows.h>
 #else
 #include <unistd.h>
 #endif
 
-void awaitFiveSeconds()
+void awaitNSeconds(int x)
 {
 #ifdef _WIN32
-    Sleep(5000);
+    Sleep(x*1000);
 #else
-    sleep(5);
+    sleep(x);
 #endif
 }
 
@@ -32,25 +36,31 @@ void cleanScreen()
 
 int main()
 {
-    setlocale(LC_ALL, "UTF-16");
+    SetConsoleOutputCP(CP_UTF8);
+    setlocale(LC_ALL, "");
     srand(time(NULL));
 
     int doubles[16], matrizValues[4][4], matrizASCII[4][4], play = 1;
     
     int choise[4], playerScore = 0, playerErrors = 0;
 
+    play = showMenu();
+    printf("%i",play);
+
     while (play != 0)
     {
+        cleanScreen();
         generateArrayOfDoubles(doubles);
         generateMatriz(matrizValues, doubles);
         showMatriz(matrizValues);
         fillASCIIMatriz(matrizASCII);
-        awaitFiveSeconds();
+        awaitNSeconds(5);
         while (playerErrors < 10 && playerScore < 8)
         {
             cleanScreen();
             showMatriz(matrizASCII);
-            printf("pontos: %i\n", playerScore);
+            printf(ASCCI_COLOR_BOLD_GREEN"acertos: %i   ", playerScore);
+            printf(ASCII_COLOR_BOLD_RED"erros: %i\n" ASCII_RESET_COLOR,playerErrors);
             askForInput(choise, matrizValues, matrizASCII);
             if (checkMatch(choise, matrizValues, matrizASCII))
             {
@@ -69,6 +79,6 @@ int main()
         printf("Pressione 0 para encerrar o jogo\n");
         scanf("%d", &play);
     }
-
+    printf("até a próxima \1");
     return 0;
 }
