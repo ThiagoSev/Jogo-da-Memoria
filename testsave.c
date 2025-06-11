@@ -21,7 +21,7 @@ void saveScore(int playerScore, int playerErrors)
 	{
 		apelido[strlen(apelido) - 1] = '\0';
 	}
-	arquivo = fopen("", "a");
+	arquivo = fopen("c:/temp/exemplo.txt", "a");
 	if (arquivo == NULL)
 	{
 		printf("Erro ao abrir ou criar o arquivo!\n");

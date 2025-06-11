@@ -6,7 +6,7 @@
 
 void askForInput(int choise[4], int matrizValues[4][4], int matrizASCII[4][4])
 {
-    int isRepeated=0;
+    int isRepeated=0, isEqual=0;
     do{
 
         printf("digite a primeira coordenada(x-y):\n");
@@ -14,14 +14,21 @@ void askForInput(int choise[4], int matrizValues[4][4], int matrizASCII[4][4])
         printf("digite a segunda coordenada(x-y):\n");
         scanf("%i %i", &choise[2], &choise[3]);
 
+        if((choise[0] == choise[2]) && (choise[1] == choise[3])){
+            printf("\nVoce escolheu as mesmas cartas! escolha cartas diferentes.\n");
+            isEqual = 1;
+        }else{
+            isEqual = 0;
+        }
+
         if(matrizASCII[choise[0]][choise[1]] != -1 || matrizASCII[choise[2]][choise[3]] != -1){
-            printf("\nvoce ja digitou estas coordenadas!\nDigite novamente\n");
+            printf("\nvoce ja digitou estas coordenadas!\nDigite novamente.\n");
             isRepeated = 1;
         }else{
             isRepeated = 0;
         }
 
-    }while(isRepeated);
+    }while(isRepeated || isEqual);
 
     matrizASCII[choise[0]][choise[1]] = matrizValues[choise[0]][choise[1]];
     matrizASCII[choise[2]][choise[3]] = matrizValues[choise[2]][choise[3]];
@@ -29,7 +36,7 @@ void askForInput(int choise[4], int matrizValues[4][4], int matrizASCII[4][4])
 
 bool checkMatch(int choise[4], int matrizValues[4][4], int matrizASCII[4][4])
 {
-    if (matrizValues[choise[0]][choise[1]] == matrizValues[choise[2]][choise[3]])
+    if ((matrizValues[choise[0]][choise[1]] == matrizValues[choise[2]][choise[3]]))
     {
         printf("trocou");
         matrizASCII[choise[0]][choise[1]] = matrizValues[choise[0]][choise[1]];

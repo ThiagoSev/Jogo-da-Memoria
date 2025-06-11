@@ -46,7 +46,7 @@ int main()
         showMatriz(matrizValues);
         fillASCIIMatriz(matrizASCII);
         awaitFiveSeconds();
-        while (playerErrors < 10 || playerScore < 8)
+        while (playerErrors < 10 && playerScore < 8)
         {
             cleanScreen();
             showMatriz(matrizASCII);
